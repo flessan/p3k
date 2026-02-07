@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description"
         content="Website Resmi Palang Merah Remaja SMK Negeri 4 Banjarmasin. Humanis, Peduli, Tanggap.">
-    <title>PMR SMKN 4 Banjarmasin - Neo Edition</title>
+    <title>Palang Merah Remaja - SMKN 4 Banjarmasin</title>
 
     <!-- PWA Meta Tags -->
     <meta name="theme-color" content="#FF0000">
@@ -24,7 +24,7 @@
     <style>
         /* --- CSS VARIABLES & RESET --- */
         :root {
-            /* Neo-Brutalism Palette */
+            /* PMR Palette */
             --primary: #FF3B30;
             /* Vibrant Red */
             --secondary: #000000;
@@ -36,7 +36,7 @@
 
             --text-main: #000000;
             --text-inverse: #FFFFFF;
-            --border-width: 3px;
+            --border-width: 4px;
             --shadow-hard: 4px 4px 0px 0px var(--secondary);
             --shadow-hover: 2px 2px 0px 0px var(--secondary);
             --radius: 0px;
@@ -51,13 +51,11 @@
         [data-theme="dark"] {
             --primary: #FF453A;
             --secondary: #FFFFFF;
-            /* Invert for high contrast */
             --bg-body: #101010;
             --bg-card: #1A1A1A;
             --text-main: #FFFFFF;
             --text-inverse: #000000;
             --shadow-hard: 4px 4px 0px 0px rgba(255, 255, 255, 0.2);
-            /* Brighter shadow for dark mode visibility */
         }
 
         * {
@@ -184,6 +182,9 @@
         .badge {
             display: inline-block;
             padding: 4px 8px;
+            position: relative;
+            top: 10px;
+            right: auto;
             background: var(--secondary);
             color: var(--bg-card);
             font-size: 0.75rem;
@@ -320,6 +321,148 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 1.5rem;
+        }
+
+        /* --- GALLERY GRID (Google Photos Style) --- */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 10px;
+            padding: 1rem 0;
+        }
+
+        .gallery-item {
+            position: relative;
+            aspect-ratio: 1 / 1;
+            overflow: hidden;
+            border: 4px solid var(--secondary);
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            background: var(--bg-card);
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.02);
+            box-shadow: 6px 6px 0px 0px var(--primary);
+            z-index: 10;
+        }
+
+        .gallery-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(100%);
+            transition: filter 0.3s;
+        }
+
+        .gallery-item:hover .gallery-img {
+            filter: grayscale(0%);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+            color: white;
+            padding: 1.5rem 0.8rem 0.5rem;
+            font-family: var(--font-heading);
+            font-weight: 700;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        /* --- ALBUM SLIDER STYLES --- */
+        .album-slider-container {
+            position: relative;
+            margin-bottom: 1rem;
+            width: 100%;
+        }
+
+        .album-slider {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            scrollbar-width: none;
+            /* Firefox */
+            -ms-overflow-style: none;
+            /* IE/Edge */
+            gap: 0;
+            cursor: grab;
+            border: 3px solid var(--secondary);
+        }
+
+        .album-slider::-webkit-scrollbar {
+            display: none;
+            /* Chrome/Safari */
+        }
+
+        .slider-item {
+            flex: 0 0 100%;
+            width: 100%;
+            scroll-snap-align: center;
+        }
+
+        .album-img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .slider-dots {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+        .slider-dot {
+            width: 12px;
+            height: 12px;
+            background: var(--bg-card);
+            border: 2px solid var(--secondary);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .slider-dot.active {
+            background: var(--primary);
+            transform: scale(1.2);
+            box-shadow: 2px 2px 0px 0px var(--secondary);
+        }
+
+        .album-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border: 3px solid var(--secondary);
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .album-img:hover {
+            transform: scale(1.02);
+        }
+
+        .photo-count-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: var(--primary);
+            color: white;
+            padding: 2px 6px;
+            font-size: 0.7rem;
+            font-weight: 800;
+            border: 2px solid var(--secondary);
+            z-index: 5;
         }
 
         .card {
@@ -471,7 +614,7 @@
         }
 
         .duo-avatar {
-            margin-right: -15px;
+            margin-right: 5px;
             position: relative;
             z-index: 2;
         }
@@ -782,8 +925,9 @@
     <!-- MARQUEE ALERT -->
     <div class="marquee-container">
         <div class="marquee-content">
-            <i class="fa-solid fa-triangle-exclamation"></i> INFO GAWAT DARURAT: HUBUNGI 112 ATAU SEKRETARIAT PMR |
-            JADWAL DONOR DARAH: 15 OKTOBER DI AULA UTAMA | PENDAFTARAN RELAWAN DIBUKA! <i
+            <i class="fa-solid fa-triangle-exclamation"></i> INFO GAWAT DARURAT DI SMKN4BJM: HUBUNGI ATAU SEKRETARIAT
+            PMR |
+            JADWAL EKSTRAKURIKULER: SETIAP HARI KAMIS PUKUL 14.30-16.30 | PENDAFTARAN RELAWAN DIBUKA! <i
                 class="fa-solid fa-triangle-exclamation"></i>
         </div>
     </div>
@@ -812,10 +956,10 @@
 
                 <div class="hero-actions">
                     <a href="#" onclick="openDonateModal()" class="btn btn-primary">
-                        <i class="fa-solid fa-hand-holding-heart"></i> Donor Darah
+                        <i class="fa-solid fa-hand-holding-heart"></i> Latihan Rutin
                     </a>
-                    <a href="#" onclick="switchTab('tim')" class="btn btn-secondary">
-                        <i class="fa-solid fa-users"></i> Relawan
+                    <a href="#member" onclick="switchTab('profil')" class="btn btn-secondary">
+                        <i class="fa-solid fa-users"></i> Struktur Organisasi
                     </a>
                 </div>
             </div>
@@ -864,29 +1008,30 @@
             <div class="neo-grid">
                 <div class="card">
                     <h3 style="color: var(--primary);"><i class="fa-solid fa-eye"></i> Visi</h3>
-                    <p>Mewujudkan anggota PMR yang berkarakter, peduli, terampil, dan siap berperan aktif dalam
-                        masyarakat.</p>
+                    <p>Mewujudkan anggota Palang Merah Remaja yang berkarakter, peduli kemanusiaan, terampil, dan siap
+                        berperan aktif dalam lingkungan sekolah maupun masyarakat.</p>
                 </div>
                 <div class="card">
                     <h3 style="color: var(--primary);"><i class="fa-solid fa-list-check"></i> Misi</h3>
                     <ul style="padding-left: 1.2rem;">
-                        <li>Menanamkan nilai kepedulian & solidaritas.</li>
-                        <li>Bakti sosial berkala.</li>
-                        <li>Kerjasama dengan PMI Kota.</li>
-                        <li>Pelatihan P3K berkelanjutan.</li>
+                        <li>Menanamkan nilai kepedulian, kemanusiaan, dan solidaritas kepada seluruh anggota.</li>
+                        <li>Meningkatkan pengetahuan serta keterampilan kepalangmerahan dan pertolongan pertama.</li>
+                        <li>Membentuk sikap disiplin, tanggung jawab, dan kerja sama dalam berorganisasi.</li>
+                        <li>Mendukung terciptanya lingkungan sekolah yang sehat, aman, dan siaga.</li>
+                        <li>Berperan aktif dalam kegiatan sosial dan kemanusiaan di masyarakat.</li>
                     </ul>
                 </div>
             </div>
 
-            <h2 style="margin-top: 3rem;">Struktur Organisasi</h2>
-            <p class="text-sm">Periode 2024/2025</p>
+            <h2 id="member" style="margin-top: 3rem;">Struktur Organisasi</h2>
+            <p class="text-sm">Periode 2025/2026</p>
 
             <div class="org-chart">
                 <!-- LEVEL 1: ADVISORY -->
                 <div style="display:flex; gap:2rem; justify-content:center; flex-wrap:wrap; width:100%;">
                     <div class="org-node">
                         <div class="role-icon"><i class="fa-solid fa-graduation-cap"></i></div>
-                        <img src="https://i.pravatar.cc/150?u=eka" class="member-img" alt="Wakasek">
+                        <img src="" class="member-img" alt="Wakasek">
                         <div class="badge">Wakasek Kesiswaan</div>
                         <h4>Eka Lisdyawati, M.Pd.</h4>
                         <p class="role-desc">Penanggung jawab umum kebijakan kesiswaan dan pengembangan organisasi
@@ -910,7 +1055,7 @@
                     <!-- Ketua PMR Node -->
                     <div class="org-node" style="min-width:220px;">
                         <div class="role-icon"><i class="fa-solid fa-crown"></i></div>
-                        <img src="https://i.pravatar.cc/150?u=adilla" class="member-img" alt="Ketua">
+                        <img src="" class="member-img" alt="Ketua">
                         <div class="badge" style="background:var(--primary)">Ketua PMR</div>
                         <h4>Adilla Hafiza</h4>
                         <p class="role-desc">Pemimpin eksekutif dan penanggung jawab utama seluruh program kerja PMR
@@ -921,10 +1066,10 @@
                     <div class="org-node" style="min-width:240px;">
                         <div class="role-icon"><i class="fa-solid fa-users-gear"></i></div>
                         <div style="display:flex; justify-content:center; margin-bottom:0.3rem;">
-                            <img src="https://i.pravatar.cc/150?u=nada" class="member-img duo-avatar"
-                                style="width:60px; height:60px; border-width:2px;" alt="Wakil 1">
-                            <img src="https://i.pravatar.cc/150?u=syifa" class="member-img duo-avatar"
-                                style="width:60px; height:60px; border-width:2px;" alt="Wakil 2">
+                            <img src="" class="member-img duo-avatar" style="width:60px; height:60px; border-width:2px;"
+                                alt="Wakil 1">
+                            <img src="" class="member-img duo-avatar" style="width:60px; height:60px; border-width:2px;"
+                                alt="Wakil 2">
                         </div>
                         <div class="badge" style="background:var(--primary)">Wakil Ketua</div>
                         <div style="text-align:center;">
@@ -932,6 +1077,42 @@
                             <h4 style="font-size: 0.85rem;">Assyifa Qolbi</h4>
                         </div>
                         <p class="role-desc">Pendamping ketua dalam koordinasi internal dan pengawasan kinerja staf
+                            organisasi.</p>
+                    </div>
+
+                    <!-- Co-Leadership Wakil Ketua Node -->
+                    <div class="org-node" style="min-width:240px;">
+                        <div class="role-icon"><i class="fa-solid fa-users-gear"></i></div>
+                        <div style="display:flex; justify-content:center; margin-bottom:0.3rem;">
+                            <img src="" class="member-img duo-avatar" style="width:60px; height:60px; border-width:2px;"
+                                alt="Sekretaris 1">
+                            <img src="" class="member-img duo-avatar" style="width:60px; height:60px; border-width:2px;"
+                                alt="Sekretaris 2">
+                        </div>
+                        <div class="badge" style="background:var(--primary)">Sekretaris</div>
+                        <div style="text-align:center;">
+                            <h4 style="font-size: 0.85rem; margin-bottom: 2px;">Nurul Aminah</h4>
+                            <h4 style="font-size: 0.85rem;">Aminah</h4>
+                        </div>
+                        <p class="role-desc">Penanggung jawab koordinasi internal dan pengawasan kinerja staf
+                            organisasi.</p>
+                    </div>
+
+                    <!-- Co-Leadership Wakil Ketua Node -->
+                    <div class="org-node" style="min-width:240px;">
+                        <div class="role-icon"><i class="fa-solid fa-users-gear"></i></div>
+                        <div style="display:flex; justify-content:center; margin-bottom:0.3rem;">
+                            <img src="" class="member-img duo-avatar" style="width:60px; height:60px; border-width:2px;"
+                                alt="Bendahara 1">
+                            <img src="" class="member-img duo-avatar" style="width:60px; height:60px; border-width:2px;"
+                                alt="Bendahara 2">
+                        </div>
+                        <div class="badge" style="background:var(--primary)">Bendahara</div>
+                        <div style="text-align:center;">
+                            <h4 style="font-size: 0.85rem; margin-bottom: 2px;">Nurul Aminah</h4>
+                            <h4 style="font-size: 0.85rem;">Aminah</h4>
+                        </div>
+                        <p class="role-desc">Penanggung jawab koordinasi internal dan pengawasan kinerja staf
                             organisasi.</p>
                     </div>
                 </div>
@@ -948,39 +1129,75 @@
                 <div class="neo-grid" style="width:100%; text-align:center; margin-top:2rem;">
                     <div class="card">
                         <div class="role-icon"><i class="fa-solid fa-kit-medical"></i></div>
-                        <img src="https://i.pravatar.cc/150?u=dewi" class="member-img" alt="UKS"
+                        <img src="" class="member-img" alt="UKS"
                             style="margin-bottom: 0.5rem; width: 60px; height: 60px;">
                         <div class="badge" style="background:var(--accent); margin-bottom: 0.5rem;">Koordinator UKS
                         </div>
-                        <h4>–</h4>
+                        <h4>Ketua: Syailha Nor Rahma</h4>
+                        <ol style="margin: 0.5rem auto;">
+                            <li>Syifa Maurinjia</li>
+                            <li>Nazma Az Zahra</li>
+                            <li>Nahdhah</li>
+                            <li>Andi Nabilla Ramadani</li>
+                            <li>Maulidia Hayuningdiah</li>
+                            <li>Naufa Azmi Khairizqa</li>
+                            <li>Melsia Oktavia</li>
+                        </ol>
                         <p class="role-desc" style="margin: 0.5rem auto;">Penanggung jawab operasional harian dan
                             inventaris obat-obatan di UKS.</p>
                     </div>
                     <div class="card">
                         <div class="role-icon"><i class="fa-solid fa-bullhorn"></i></div>
-                        <img src="https://i.pravatar.cc/150?u=maya1" class="member-img" alt="Humas"
+                        <img src="" class="member-img" alt="Humas"
                             style="margin-bottom: 0.5rem; width: 60px; height: 60px;">
                         <div class="badge" style="background:var(--primary); margin-bottom: 0.5rem;">Koordinator Humas
                         </div>
-                        <h4>–</h4>
+                        <h4>Ketua: Aninda Rila Dinisyahara</h4>
+                        <ol style="margin: 0.5rem auto;">
+                            <li>Eva Regina Putri Riyanti</li>
+                            <li>Lisa Erfina</li>
+                            <li>Naylah Azkiya</li>
+                            <li>Rama</li>
+                            <li>Alia Rahmawati</li>
+                            <li>Ferdi Herlino</li>
+                            <li>Almira Fakhriah Hasan</li>
+                        </ol>
                         <p class="role-desc" style="margin: 0.5rem auto;">Jembatan komunikasi antara PMR dengan pihak
                             sekolah maupun eksternal.</p>
                     </div>
                     <div class="card">
                         <div class="role-icon"><i class="fa-solid fa-users"></i></div>
-                        <img src="https://i.pravatar.cc/150?u=maya2" class="member-img" alt="SDM"
+                        <img src="" class="member-img" alt="SDM"
                             style="margin-bottom: 0.5rem; width: 60px; height: 60px;">
-                        <div class="badge" style="margin-bottom: 0.5rem;">Koordinator SDM</div>
-                        <h4>–</h4>
+                        <div class="badge" style="margin-bottom: 0.5rem;">Koordinator PSDM</div>
+                        <h4>Ketua: Muhammad Yorda Herdana</h4>
+                        <ol style="margin: 0.5rem auto;">
+                            <li>A. Ustman Abdullah</li>
+                            <li>Kirani</li>
+                            <li>Halissa Azzahra</li>
+                            <li>Delya Ananda</li>
+                            <li>Lionel Abdi Darma Wicaksono</li>
+                            <li>Selviana Dewi</li>
+                            <li>Muhammad Sultan Ariady</li>
+                        </ol>
                         <p class="role-desc" style="margin: 0.5rem auto;">Fokus pada pengembangan kapasitas anggota dan
                             menjaga keharmonisan tim.</p>
                     </div>
                     <div class="card">
                         <div class="role-icon"><i class="fa-solid fa-handshake-angle"></i></div>
-                        <img src="https://i.pravatar.cc/150?u=maya3" class="member-img" alt="Somas"
+                        <img src="" class="member-img" alt="Somas"
                             style="margin-bottom: 0.5rem; width: 60px; height: 60px;">
-                        <div class="badge" style="margin-bottom: 0.5rem;">Koordinator Somas</div>
-                        <h4>–</h4>
+                        <div class="badge" style="margin-bottom: 0.5rem;">Koordinator Sosma</div>
+                        <h4>Ketua: Muhammad Akeyla</h4>
+                        <ol style="margin: 0.5rem auto;">
+                            <li>Nur Aleesya Nashirah</li>
+                            <li>Nabila Rosydah Zahro</li>
+                            <li>Zahrah Fitri Aisy</li>
+                            <li>Wulandari</li>
+                            <li>Lietya Aisya</li>
+                            <li>Firy al Humairoh Rahmah</li>
+                            <li>Sofha Raihana Kamelia</li>
+                        </ol>
                         <p class="role-desc" style="margin: 0.5rem auto;">Pelaksana utama program aksi kemanusiaan dan
                             pengabdian masyarakat.</p>
                     </div>
@@ -1042,17 +1259,17 @@
             </div>
         </section>
 
-        <!-- SECTION: KEGIATAN -->
-        <section id="kegiatan" class="fade-in hidden">
-            <h2>Aksi & Kegiatan</h2>
+        <!-- SECTION: GALERI -->
+        <section id="galeri" class="fade-in hidden">
+            <h2>Galeri Foto</h2>
 
             <div class="search-box">
                 <i class="fa-solid fa-magnifying-glass search-icon"></i>
-                <input type="text" class="search-input" id="searchActivity" placeholder="Cari kegiatan sosial...">
+                <input type="text" class="search-input" id="searchActivity" placeholder="Cari album atau foto...">
             </div>
 
-            <div class="neo-grid" id="activityContainer">
-                <!-- Activity Cards Injected JS -->
+            <div class="gallery-grid" id="activityContainer">
+                <!-- Gallery items Injected JS -->
             </div>
         </section>
 
@@ -1137,9 +1354,9 @@
             <i class="fa-solid fa-graduation-cap"></i>
             <span>EduScope</span>
         </div>
-        <div class="nav-item" id="nav-kegiatan" onclick="switchTab('kegiatan')">
-            <i class="fa-solid fa-calendar-check"></i>
-            <span>Kegiatan</span>
+        <div class="nav-item" id="nav-galeri" onclick="switchTab('galeri')">
+            <i class="fa-solid fa-images"></i>
+            <span>Galeri</span>
         </div>
         <div class="nav-item" id="nav-kontak" onclick="switchTab('kontak')">
             <i class="fa-solid fa-envelope-open-text"></i>
@@ -1147,27 +1364,25 @@
         </div>
     </nav>
 
-    <!-- MODAL: DETAIL KEGIATAN -->
-    <div class="modal-overlay" id="activityModal">
+    <!-- MODAL: DETAIL GALERI -->
+    <div class="modal-overlay" id="galleryModal">
         <div class="modal-box">
             <div class="modal-header">
-                <h3 id="modalTitle">Judul Kegiatan</h3>
-                <button class="close-modal" onclick="closeModal('activityModal')"><i
+                <h3 id="modalTitle">Judul Foto</h3>
+                <button class="close-modal" onclick="closeModal('galleryModal')"><i
                         class="fa-solid fa-xmark"></i></button>
             </div>
             <div class="modal-body">
-                <img id="modalImg" src="" alt="Detail"
-                    style="width:100%; height:200px; object-fit:cover; border: 3px solid black; margin-bottom:1rem;">
+                <div id="modalAlbum" class="album-slider-container">
+                    <!-- Images Injected JS -->
+                </div>
+                <div id="sliderDots" class="slider-dots"></div>
                 <span class="badge" id="modalDate">Tanggal</span>
                 <div style="margin: 1rem 0;">
                     <p id="modalDesc">Deskripsi...</p>
                 </div>
-                <div style="background: var(--bg-body); border: 2px solid var(--secondary); padding:1rem;">
-                    <h4 style="color:var(--primary)"><i class="fa-solid fa-chart-line"></i> Dampak</h4>
-                    <p class="text-sm" id="modalImpact">Impact text...</p>
-                </div>
                 <button class="btn btn-primary btn-block" style="margin-top:1rem;"
-                    onclick="closeModal('activityModal')">Tutup</button>
+                    onclick="closeModal('galleryModal')">Tutup</button>
             </div>
         </div>
     </div>
@@ -1176,25 +1391,43 @@
     <div class="modal-overlay" id="donateModal">
         <div class="modal-box" style="border-color: var(--primary);">
             <div class="modal-header" style="background: var(--primary);">
-                <h3><i class="fa-solid fa-hand-holding-medical"></i> Info Donor Darah</h3>
+                <h3><i class="fa-solid fa-hand-holding-medical"></i> Info Latihan Rutin</h3>
                 <button class="close-modal" onclick="closeModal('donateModal')"><i
                         class="fa-solid fa-xmark"></i></button>
             </div>
             <div class="modal-body">
-                <p>Syarat Donor Darah:</p>
-                <ul style="margin-left:1.5rem; margin-bottom:1.5rem;">
-                    <li>Usia 17-60 tahun</li>
-                    <li>Berat badan min. 50 kg</li>
-                    <li>Tensi stabil (110/160 - 180/100)</li>
-                    <li>Sehat jasmani & rohani</li>
+                <p>Latihan Rutin:</p>
+                <ul style="margin-left:1.5rem; margin-bottom:1.5rem; font-weight: 600;">
+                    <li>Membawa Seragam Olahraga / PDL Organisasi Untuk Pengajar</li>
+                    <li>Membawa alat tulis & buku catatan</li>
+                    <li>Membawa atribut PMR (Kalo Misal Praktik) Bagi Pengajar</li>
+                    <li>Menjaga Kebersihan & Kedisiplinan</li>
                 </ul>
-                <div style="background: var(--accent); padding:1rem; border: 2px solid black; margin-bottom:1rem;">
+                <div style="background: var(--accent); padding:1rem; border: 2px solid black; margin-bottom:1.5rem;">
                     <strong>Jadwal Berikutnya:</strong><br>
-                    15 Oktober 2023<br>
-                    Aula SMKN 4 Banjarmasin (08.00 - 12.00)
+                    Setiap Hari Kamis<br>
+                    Aula / Lapangan (15.00 - 17.00)
                 </div>
-                <a href="#" class="btn btn-primary btn-block"><i class="fa-brands fa-whatsapp"></i> Konfirmasi
-                    Kehadiran</a>
+
+                <p style="margin-bottom: 0.5rem;">Tautan Terkait:</p>
+                <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1.5rem;">
+                    <a href="#member" onclick="closeModal('donateModal'); switchTab('profil')" class="badge"
+                        style="text-decoration:none; cursor:pointer; background: var(--secondary); color: var(--bg-card);">
+                        <i class="fa-solid fa-users"></i> Struktur Organisasi
+                    </a>
+                    <a href="#activity" onclick="closeModal('donateModal'); switchTab('galeri')" class="badge"
+                        style="text-decoration:none; cursor:pointer; background: var(--primary); color: white;">
+                        <i class="fa-solid fa-images"></i> Galeri Kegiatan
+                    </a>
+                    <a href="https://wa.me/6281338977042" target="_blank" class="badge"
+                        style="text-decoration:none; cursor:pointer; background: #25D366; color: white;">
+                        <i class="fa-brands fa-whatsapp"></i> Hubungi Pembina
+                    </a>
+                </div>
+
+                <a href="https://skenpat.pages.dev/eskul" class="btn btn-primary btn-block"><i
+                        class="fa-solid fa-calendar-days"></i> Lihat
+                    Jadwal Lengkap</a>
             </div>
         </div>
     </div>
@@ -1207,40 +1440,43 @@
         // --- DATA CONTENT ---
         const activities = [
             {
-                id: 'donor',
-                title: 'Aksi Donor Darah Rutin',
-                date: '15 Oktober 2023',
-                category: 'Kesehatan',
-                image: 'https://picsum.photos/seed/pmrneo1/300/200',
-                desc: 'Kegiatan donor darah bekerjasama dengan UTD PMI Kota Banjarmasin di Aula SMKN 4. Diikuti oleh siswa dan guru.',
-                impact: 'Terhimpun 30 kantong darah yang disalurkan ke PMI Kota Banjarmasin.'
+                id: 'latihan',
+                title: 'Latgab (Latihan Gabungan) Pramuka Man 3 Banjarmasin Bersama PMR (Palang Merah Remaja) SMKN 4 Banjarmasin',
+                date: '16 Januari 2026',
+                image: 'https://res.cloudinary.com/dahcxjdbl/image/upload/v1770445098/WhatsApp_Image_2026-02-02_at_21.17.48_1_elixib.jpg',
+                image2: 'https://res.cloudinary.com/dahcxjdbl/image/upload/v1770445098/WhatsApp_Image_2026-02-02_at_21.17.48_tbchum.jpg',
+                image3: 'https://res.cloudinary.com/dahcxjdbl/image/upload/v1770445098/WhatsApp_Image_2026-02-02_at_21.17.48_2_gzls5q.jpg',
+                desc: 'Kegiatan Latihan Gabungan yang bertujuan untuk mempererat tali silaturahmi dan meningkatkan keterampilan pertolongan pertama antar organisasi.',
+            },
+            {
+                id: 'latihan-2',
+                title: 'Latgab (Latihan Gabungan) PMR Wira SMKN 4 Banjarmasin Bersama Pramuka Man 3 Banjarmasin',
+                date: '17 Januari 2026',
+                image: 'https://res.cloudinary.com/dahcxjdbl/image/upload/v1770445097/WhatsApp_Image_2026-02-02_at_21.17.49_nl0mgr.jpg',
+                image2: 'https://res.cloudinary.com/dahcxjdbl/image/upload/v1770445097/WhatsApp_Image_2026-02-02_at_21.17.49_2_allwc1.jpg',
+                image3: 'https://res.cloudinary.com/dahcxjdbl/image/upload/v1770445097/WhatsApp_Image_2026-02-02_at_21.17.49_1_efbbiz.jpg',
+                desc: 'Kegiatan Latihan Gabungan yang bertujuan untuk mempererat tali silaturahmi dan meningkatkan keterampilan pertolongan pertama antar organisasi.',
             },
             {
                 id: 'simulasi',
                 title: 'Simulasi Kebakaran',
                 date: '28 September 2023',
-                category: 'Pelatihan',
                 image: 'https://picsum.photos/seed/pmrneo2/300/200',
                 desc: 'Simulasi evakuasi korban kebakaran dan gempa bumi sebagai bagian dari persiapan Bulan Pengurangan Risiko Bencana.',
-                impact: 'Siswa lebih memahami jalur evakuasi dan teknik P3K dasar saat situasi darurat.'
             },
             {
                 id: 'sosial',
                 title: 'Bakti Sosial Panti',
                 date: '20 Agustus 2023',
-                category: 'Sosial',
                 image: 'https://picsum.photos/seed/pmrneo3/300/200',
                 desc: 'Kunjungan dan pemberian santunan serta sembako kepada Panti Asuhan Al-Hikmah Banjarmasin.',
-                impact: 'Meningkatkan rasa kepedulian sosial anggota PMR dan menebar senyum bagi adik-adik panti.'
             },
             {
                 id: 'persami',
                 title: 'Persami & LDK',
                 date: '12-13 Agustus 2023',
-                category: 'Kedisiplinan',
                 image: 'https://picsum.photos/seed/pmrneo4/300/200',
                 desc: 'Perkemahan gabungan PMR Wira dan Madya untuk melatih kemandirian dan kerjasama tim.',
-                impact: 'Terbentuknya karakter yang disiplin dan solidaritas antar anggota baru dan lama.'
             }
         ];
 
@@ -1265,19 +1501,22 @@
         function renderActivities(data) {
             activityContainer.innerHTML = '';
             data.forEach(act => {
-                const card = document.createElement('div');
-                card.className = 'card';
-                card.onclick = () => openActivityDetail(act.id);
-                card.innerHTML = `
-                    <img src="${act.image}" class="card-img" alt="${act.title}" loading="lazy">
-                    <div class="card-content">
-                        <span class="badge" style="width:fit-content; margin-bottom:0.5rem;">${act.category}</span>
-                        <div class="card-title">${act.title}</div>
-                        <div class="card-text">${act.desc.substring(0, 60)}...</div>
-                        <button class="btn btn-outline btn-block" style="font-size:0.8rem; padding:0.5rem;">Detail Kegiatan</button>
-                    </div>
+                const item = document.createElement('div');
+                item.className = 'gallery-item';
+                item.onclick = () => openGalleryDetail(act.id);
+
+                let multiIndicator = '';
+                const images = [act.image, act.image2, act.image3].filter(img => img);
+                if (images.length > 1) {
+                    multiIndicator = `<div class="photo-count-badge"><i class="fa-solid fa-images"></i> ${images.length}</div>`;
+                }
+
+                item.innerHTML = `
+                    ${multiIndicator}
+                    <img src="${act.image}" class="gallery-img" alt="${act.title}" loading="lazy">
+                    <div class="gallery-overlay">${act.title}</div>
                 `;
-                activityContainer.appendChild(card);
+                activityContainer.appendChild(item);
             });
         }
 
@@ -1286,7 +1525,7 @@
             const highlight = document.createElement('div');
             highlight.className = 'card';
             highlight.style.gridColumn = "1 / -1"; // Make it full width in grid
-            highlight.onclick = () => openActivityDetail(latest.id);
+            highlight.onclick = () => openGalleryDetail(latest.id);
             highlight.innerHTML = `
                 <div class="card-content" style="flex-direction:row; gap:1rem; align-items:center; flex-wrap:wrap;">
                     <img src="${latest.image}" style="width:120px; height:120px; object-fit:cover; border:2px solid var(--secondary);" alt="Highlight">
@@ -1307,8 +1546,7 @@
         searchInput.addEventListener('input', (e) => {
             const keyword = e.target.value.toLowerCase();
             const filtered = activities.filter(act =>
-                act.title.toLowerCase().includes(keyword) ||
-                act.category.toLowerCase().includes(keyword)
+                act.title.toLowerCase().includes(keyword)
             );
             renderActivities(filtered);
         });
@@ -1319,7 +1557,7 @@
                 'beranda': 'beranda',
                 'profil': 'profil',
                 'edukasi': 'edukasi',
-                'kegiatan': 'kegiatan',
+                'galeri': 'galeri',
                 'kontak': 'kontak'
             };
 
@@ -1353,17 +1591,56 @@
         }
 
         // --- MODAL LOGIC ---
-        function openActivityDetail(id) {
+        function openGalleryDetail(id) {
             const act = activities.find(a => a.id === id);
             if (!act) return;
 
             document.getElementById('modalTitle').innerText = act.title;
-            document.getElementById('modalDate').innerText = `${act.date} • ${act.category}`;
-            document.getElementById('modalImg').src = act.image;
+            document.getElementById('modalDate').innerText = act.date;
             document.getElementById('modalDesc').innerText = act.desc;
-            document.getElementById('modalImpact').innerText = act.impact;
 
-            document.getElementById('activityModal').classList.add('open');
+            const modalAlbum = document.getElementById('modalAlbum');
+            const sliderDots = document.getElementById('sliderDots');
+            modalAlbum.innerHTML = '';
+            sliderDots.innerHTML = '';
+
+            const images = [act.image, act.image2, act.image3].filter(img => img);
+
+            // Create slider
+            const slider = document.createElement('div');
+            slider.className = 'album-slider';
+
+            images.forEach((imgUrl, index) => {
+                // Image item
+                const slide = document.createElement('div');
+                slide.className = 'slider-item';
+                slide.innerHTML = `<img src="${imgUrl}" class="album-img" alt="${act.title}" onclick="window.open('${imgUrl}', '_blank')">`;
+                slider.appendChild(slide);
+
+                // Dot
+                const dot = document.createElement('div');
+                dot.className = index === 0 ? 'slider-dot active' : 'slider-dot';
+                dot.onclick = () => {
+                    slider.scrollTo({
+                        left: slider.offsetWidth * index,
+                        behavior: 'smooth'
+                    });
+                };
+                sliderDots.appendChild(dot);
+            });
+
+            modalAlbum.appendChild(slider);
+
+            // Scroll listener for dots
+            slider.addEventListener('scroll', () => {
+                const index = Math.round(slider.scrollLeft / slider.offsetWidth);
+                const dots = sliderDots.querySelectorAll('.slider-dot');
+                dots.forEach((d, i) => {
+                    d.classList.toggle('active', i === index);
+                });
+            });
+
+            document.getElementById('galleryModal').classList.add('open');
         }
 
         function openDonateModal() {
